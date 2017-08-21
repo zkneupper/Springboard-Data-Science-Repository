@@ -30,14 +30,50 @@ This Python script will read the original data from 'default of credit card clie
 
 # Data Wrangling Steps:
 
-1. First, I verified that the data did not contain any null values;
-2. Second, I categorized all variables as either discrete (categorical) or continuous variables;
-3. Third, I analyzed the discrete (categorical) variables:
+### 1. Check for null values
+
+I verified that the data did not contain any null values.
+
+### 2. Identify discrete (categorical) and continuous variables.
+
+I categorized all variables as either discrete (categorical) or continuous variables.
+
+### 3. Wrangle the discrete (categorical) variables
+
+I checked that categorical variables only took on values that they were supposed to take (per the descriptions on https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients and https://www.kaggle.com/uciml/default-of-credit-card-clients-dataset/discussion/34608).  
+
+Some of the data was mis-categorized.  For instance, education should have only taken on 4 values:
+
+1. 1 = graduate school; 
+2. 2 = university; 
+3. 3 = high school; and 
+4 = others).
+
+However, in the original data, 'EDUCATION' took on values of 0, 1, 2, 3, 4, 5, and 6.
+I re-categorized observations with values of 0, 5, and 6 as 4 ("others").
+
+I checked each of the discrete (categorical) variables and re-categorized observations where necessary.
 
 
 
-Submission: Create a short document (1-2 pages) in your github describing the data wrangling steps that you undertook to clean your capstone project data set. What kind of cleaning steps did you perform? How did you deal with missing values, if any? Were there outliers, and how did you decide to handle them? This document will eventually become part of your milestone report.
 
-Submit a link to this document. 
+<p></p>
+
+The dependent variable ('default payment next month') is a categorical variable that takes only two values (Yes = 1, No = 0).  The dependent variable ('default payment next month') is imbalanced.
+
++ 77.9% of the observations do not default in the next month ('default payment next month' = 0).
+
++ 22.1% of the observations do default in the next month ('default payment next month' = 1).
+
+The data set may need to be rebalanced / resampled. 
+
+
+
+<p></p>
+
+### 3. Wrangle the continuous variables
+
+I checked continuous variables for outliers (high kurtosis).  Other than the Age variable, all of the other continuous variables had high kurtosis and were highly skewed.  The outliers may need to be trimmed for linear models.
+
 
 

@@ -1,4 +1,13 @@
 
+# Written by Zachary Kneupper
+# 2017-08-21
+
+# This program was written to wrangle/clean data in
+# 'default of credit card clients.csv' and to export the
+# wrangled/cleaned data data to a new file called 
+# 'default of credit card clients - wrangled.csv'
+
+
 import pandas as pd
 import numpy as np
 
@@ -189,86 +198,20 @@ df_edited.rename(columns={'PAY_0': 'PAY_1'}, inplace=True)
 ####################################################################################
 ####################################################################################
 
-# 'BILL_AMT1' has high kurtosis and is highly skewed. 
+# 'BILL_AMT1', 'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', and 
+# 'BILL_AMT6' have high kurtosis and is highly skewed. 
 # Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'BILL_AMT1' at this point.
+# However, no data wrangling is required for 'BILL_AMT1', 'BILL_AMT2', 
+# 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', and 'BILL_AMT6' at this point.
 
 ####################################################################################
 ####################################################################################
 
-# 'BILL_AMT2' has high kurtosis and is highly skewed. 
+# 'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', and 
+# 'PAY_AMT6' have high kurtosis and is highly skewed. 
 # Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'BILL_AMT2' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'BILL_AMT3' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'BILL_AMT3' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'BILL_AMT4' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'BILL_AMT4' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'BILL_AMT5' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'BILL_AMT5' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'BILL_AMT6' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'BILL_AMT6' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'PAY_AMT1' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'PAY_AMT1' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'PAY_AMT2' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'PAY_AMT2' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'PAY_AMT3' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'PAY_AMT3' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'PAY_AMT4' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'PAY_AMT4' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'PAY_AMT5' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'PAY_AMT5' at this point.
-
-####################################################################################
-####################################################################################
-
-# 'PAY_AMT6' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'PAY_AMT6' at this point.
+# However, no data wrangling is required for 'PAY_AMT1', 'PAY_AMT2', 
+# 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', and 'PAY_AMT6' at this point.
 
 ####################################################################################
 ####################################################################################

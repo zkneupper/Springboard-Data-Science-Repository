@@ -49,10 +49,10 @@ Some of the data was mis-categorized.  For instance, education should have only 
 3. 3 = high school; and 
 4 = others).
 
-However, in the original data, 'EDUCATION' took on values of 0, 1, 2, 3, 4, 5, and 6.
+However, in the unwrangled data, 'EDUCATION' took on values of 0, 1, 2, 3, 4, 5, and 6.
 I re-categorized observations with values of 0, 5, and 6 as 4 ("others").
 
-I checked each of the discrete (categorical) variables and re-categorized observations where necessary.
+Similarly, I checked each of the discrete (categorical) variables and re-categorized observations where necessary.
 
 
 

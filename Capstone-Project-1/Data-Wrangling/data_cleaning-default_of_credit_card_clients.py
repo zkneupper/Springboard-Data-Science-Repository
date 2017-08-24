@@ -1,11 +1,14 @@
 
 # Written by Zachary Kneupper
-# 2017-08-21
+# 2017-08-24
 
 # This program was written to wrangle/clean data in
 # 'default of credit card clients.csv' and to export the
 # wrangled/cleaned data data to a new file called 
 # 'default of credit card clients - wrangled.csv'
+# and a second wrangled/cleaned with outliers removed called
+# 'default of credit card clients - wrangled - trimmed.csv'
+
 
 
 import pandas as pd
@@ -110,6 +113,36 @@ def inspect_continuous_var(input_series=None):
 
 ####################################################################################
 ####################################################################################
+
+def trim(x, trim_max=None, trim_min=None):
+    """ Docstring: Trim outliers below trim_min or above trim_max.
+    """
+    if ((trim_max != None) & (trim_min != None)):
+        if x > trim_max:
+             return trim_max
+        else:
+            if x < trim_min:
+                return trim_min
+            else:
+                return x
+            
+    elif (trim_max != None): 
+        if x > trim_max:
+             return trim_max
+        else:
+            return x
+
+    elif (trim_min != None): 
+        if x < trim_min:
+             return trim_min
+        else:
+            return x
+        
+    else:
+        return x
+
+####################################################################################
+####################################################################################
 # WRANGLE DATA
 ####################################################################################
 ####################################################################################
@@ -154,24 +187,7 @@ df_edited['EDUCATION'] = df_edited.EDUCATION.apply(reassign_EDUCATION)
 ####################################################################################
 ####################################################################################
 
-# Reassign 'MARRIAGE' values not in [1, 2, 3] to 3 (3 = others).
-
-def reassign_MARRIAGE(x):
-    
-    accepted_values_list = [1, 2, 3]
-
-    if x in accepted_values_list:
-        output = x
-    else:
-        output = 3
-        
-    return output
-        
-#df_edited = df.copy()
-
-df_edited['MARRIAGE'] = df_edited.MARRIAGE.apply(reassign_MARRIAGE)
-
-# 'MARRIAGE' data has been wrangled.
+# No data wrangling is needed for 'MARRIAGE'.
 
 ####################################################################################
 ####################################################################################
@@ -187,8 +203,14 @@ df_edited.rename(columns={'PAY_0': 'PAY_1'}, inplace=True)
 ####################################################################################
 
 # 'LIMIT_BAL' has high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'LIMIT_BAL' at this point.
+# We will create a second edited data set
+# in which we trim outliers.
+
+df_edited_trimmed = df_edited.copy()
+
+trim_max = df_edited_trimmed.LIMIT_BAL.quantile(.75)
+df_edited_trimmed.LIMIT_BAL = df_edited_trimmed.LIMIT_BAL.apply(trim, 
+                                                                trim_max=trim_max)
 
 ####################################################################################
 ####################################################################################
@@ -198,20 +220,147 @@ df_edited.rename(columns={'PAY_0': 'PAY_1'}, inplace=True)
 ####################################################################################
 ####################################################################################
 
-# 'BILL_AMT1', 'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', and 
-# 'BILL_AMT6' have high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'BILL_AMT1', 'BILL_AMT2', 
-# 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', and 'BILL_AMT6' at this point.
+# 'BILL_AMT1' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.BILL_AMT1.quantile(.75)
+trim_min = df_edited_trimmed.BILL_AMT1.quantile(.25)
+df_edited_trimmed.BILL_AMT1 = df_edited_trimmed.BILL_AMT1.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
 
 ####################################################################################
 ####################################################################################
 
-# 'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', and 
-# 'PAY_AMT6' have high kurtosis and is highly skewed. 
-# Outliers may need to be trimmed for linear models.
-# However, no data wrangling is required for 'PAY_AMT1', 'PAY_AMT2', 
-# 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', and 'PAY_AMT6' at this point.
+# 'BILL_AMT2' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.BILL_AMT2.quantile(.75)
+trim_min = df_edited_trimmed.BILL_AMT2.quantile(.25)
+df_edited_trimmed.BILL_AMT2 = df_edited_trimmed.BILL_AMT2.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+
+####################################################################################
+####################################################################################
+
+# 'BILL_AMT3' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.BILL_AMT3.quantile(.75)
+trim_min = df_edited_trimmed.BILL_AMT3.quantile(.25)
+df_edited_trimmed.BILL_AMT3 = df_edited_trimmed.BILL_AMT3.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'BILL_AMT4' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.BILL_AMT4.quantile(.75)
+trim_min = df_edited_trimmed.BILL_AMT4.quantile(.25)
+df_edited_trimmed.BILL_AMT4 = df_edited_trimmed.BILL_AMT4.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'BILL_AMT5' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.BILL_AMT5.quantile(.75)
+trim_min = df_edited_trimmed.BILL_AMT5.quantile(.25)
+df_edited_trimmed.BILL_AMT5 = df_edited_trimmed.BILL_AMT5.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'BILL_AMT6' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.BILL_AMT6.quantile(.75)
+trim_min = df_edited_trimmed.BILL_AMT6.quantile(.25)
+df_edited_trimmed.BILL_AMT6 = df_edited_trimmed.BILL_AMT6.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'PAY_AMT1' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.PAY_AMT1.quantile(.75)
+trim_min = df_edited_trimmed.PAY_AMT1.quantile(.25)
+df_edited_trimmed.PAY_AMT1 = df_edited_trimmed.PAY_AMT1.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'PAY_AMT2' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.PAY_AMT2.quantile(.75)
+trim_min = df_edited_trimmed.PAY_AMT2.quantile(.25)
+df_edited_trimmed.PAY_AMT2 = df_edited_trimmed.PAY_AMT2.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'PAY_AMT3' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.PAY_AMT3.quantile(.75)
+trim_min = df_edited_trimmed.PAY_AMT3.quantile(.25)
+df_edited_trimmed.PAY_AMT3 = df_edited_trimmed.PAY_AMT3.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'PAY_AMT4' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.PAY_AMT4.quantile(.75)
+trim_min = df_edited_trimmed.PAY_AMT4.quantile(.25)
+df_edited_trimmed.PAY_AMT4 = df_edited_trimmed.PAY_AMT4.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'PAY_AMT5' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.PAY_AMT5.quantile(.75)
+trim_min = df_edited_trimmed.PAY_AMT5.quantile(.25)
+df_edited_trimmed.PAY_AMT5 = df_edited_trimmed.PAY_AMT5.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
+
+####################################################################################
+####################################################################################
+
+# 'PAY_AMT6' has high kurtosis and is highly skewed. 
+# We will trim these outliers in df_edited_trimmed.
+
+trim_max = df_edited_trimmed.PAY_AMT6.quantile(.75)
+trim_min = df_edited_trimmed.PAY_AMT6.quantile(.25)
+df_edited_trimmed.PAY_AMT6 = df_edited_trimmed.PAY_AMT6.apply(trim, 
+                                                                trim_max=trim_max,
+                                                                trim_min=trim_min)
 
 ####################################################################################
 ####################################################################################
@@ -229,3 +378,20 @@ arrays = [header_list, list(df_edited_2.columns)]
 df_edited_2.columns = arrays
 
 df_edited_2.to_csv('default of credit card clients - wrangled.csv', index=False)
+
+
+####################################################################################
+####################################################################################
+
+
+temp_df = pd.read_csv('default of credit card clients.csv')
+header_list = list(temp_df.columns)
+header_list[0] = ''
+
+df_edited_trimmed_2 = df_edited_trimmed.copy()
+df_edited_trimmed_2.reset_index(inplace=True)
+
+arrays = [header_list, list(df_edited_trimmed_2.columns)]
+df_edited_trimmed_2.columns = arrays
+
+df_edited_trimmed_2.to_csv('default of credit card clients - wrangled - trimmed.csv', index=False)

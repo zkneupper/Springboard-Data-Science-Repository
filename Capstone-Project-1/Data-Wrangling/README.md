@@ -14,7 +14,8 @@ In this folder, I wrangle/clean data for my first capstone project.
 
 ### 'Data_Wrangling.ipynb'
 
-In this Jupyter Notebook, I check for missing values, mis-categorized values, and outliers.  Where necessary I make corrections to the data.  I export the corrected data to a new csv file called 'default of credit card clients - wrangled.csv'.
+In this Jupyter Notebook, I check for missing values, mis-categorized values, and outliers.  Where necessary I make corrections to the data.  I export the corrected data to a new csv file called 'default of credit card clients - wrangled.csv'.  I
+I also export another version of the corrected data in which I trim outliers to a new csv file called 'default of credit card clients - wrangled - trimmed.csv'.
 
 ### 'data_cleaning-default_of_credit_card_clients.py'
 
@@ -24,6 +25,10 @@ This Python script will read the original data from 'default of credit card clie
 ### 'default of credit card clients - wrangled.csv'
 
 'default of credit card clients - wrangled.csv' contains the wrangled/cleaned data.
+
+### 'default of credit card clients - wrangled - trimmed.csv'.
+
+'default of credit card clients - wrangled - trimmed.csv' contains the wrangled/cleaned data with trimmed outliers.
 
 
 <p></p>
@@ -73,7 +78,7 @@ The data set may need to be rebalanced / resampled.
 
 ### 3. Wrangle the continuous variables
 
-I checked continuous variables for outliers (high kurtosis).  Other than the Age variable, all of the other continuous variables had high kurtosis and were highly skewed.  The outliers may need to be trimmed for linear models.
+I checked continuous variables for outliers (high kurtosis).  Other than the Age variable, all of the other continuous variables had high kurtosis and were highly skewed.  The outliers are trimmed for linear models and exported to 'default of credit card clients - wrangled - trimmed.csv'.
 
 
 
